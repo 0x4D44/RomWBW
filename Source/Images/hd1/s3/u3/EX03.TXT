@@ -1,0 +1,113 @@
+:TITLES
+  1 "PLAN80 EXAMPLE #3"
+  2 "Projected Financial Statements and Cash Flow"
+  3 "(Thousands of Dollars)"
+:COLUMNS
+  F1980 (1) " F1980" "ACTUAL"
+  F1981 (1) " F1981" "ACTUAL"
+  F1982 (1) " F1982" "  PLAN"
+  F1983 (1) " F1983" "  PLAN"
+  F1984 (1) " F1984" "  PLAN"
+:ROWS
+  R01       "INCOME STATMENT"
+            "==============="
+            "  Sales"
+  R02       "  Standard Cost"
+  R03 (--)  "    Gross Margin"
+  R04       "  Advertising"
+  R05       "  Administration"
+  R06 (--)  "    Operating Profit"
+  R07       "  Tax Provision"
+  R08 (-=)  "    Net Income"
+  R21 (S)   "BALANCE SHEET - ASSETS"
+            "======================"
+            "  Cash"
+  R22       "  Accounts Receivable"
+  R23       "  Inventories"
+  R24 (--)  "    Current Assets"
+  R25       "  Investments"
+  R26       "  Fixed Assets"
+            "    Gross"
+  R27       "    Accum Depreciation"
+  R28 (-=)  "    Total Assets"
+  R31 (S)   "BALANCE SHEET - LIABILITIES"
+            "==========================="
+            "  Accounts Payable"
+  R32       "  Accrued Taxes"
+  R33       "  Lone Term Debt"
+  R34       "  Equits"
+  R35 (-=)  "    Total Liabilities"
+  R51 (P)   "CASH FLOW STATEMENT"
+            "==================="
+            "  Net Income"
+  R52       "  Depreciation"
+  R53       "  Change In Working Capital"
+            "    Accounts Receivable"
+  R54       "    Inventories"
+  R55       "    Accounts Payable"
+  R56 (--)  "      Total"
+  R57       "  Change Due to"
+            "    Fixed Assets"
+  R58       "    Investments"
+  R59       "  Taxes"
+            "    ADD Provision"
+  R60       "    LESS Payments"
+  R61       "  Change in"
+            "    Long Term Debt"
+  R62 (-=)  "    Net Change"
+  RX1 (SS)  "  CASH BALANCE"
+            "  ============"
+            "    Closing"
+  RX2       "    Opening"
+  RX3 (-=)  "    Net Change"
+:DATA
+  R01  =  962 1041 1100 1200 1300
+  R25  =  410  410  530  530  550
+  R26  =  720  850  940 1070 1100
+  R27  =  200
+  R32  =  300
+  R33  =  250  300  350  350  400
+  R34  =  421
+  R52  =    0   70   90  120  140
+  R60  =    0  100  100  100  100
+:RULES
+                                    : INCOME STATEMENT
+  R02  =  -.42 * R01                  :standard cost
+  R03  =   R01 + R02                  :gross margin
+  R04  =  -.08 * R01                  :advertising
+  R05  =   -50 - (.04 * R01)          :administration
+  R06  =   R03 + R04 + R05            :operating profit
+  R07  =    75 - (.48 * R06)          :tax provision
+  R08  =   R06 + R07                  :net income
+                                    : BALANCE SHEET
+  R22  =   R01 * (48/360)             :accounts receivable
+  R23  =   R01 * (60/360)             :inventories
+  R27  =  -R27 - R52                  :depreciation
+  R27  =  @CUM(R27)                   :accumulated depreciation
+  R31  =   R01 * (40/360)             :accounts payable
+  R32  =   R32 - R07 - R60            :accrued taxes
+  R32  =  @CUM(R32)                  
+  R34  =   R34 + R08                  :equity
+  R34  =  @CUM(R34)
+  R35  =  @SUM(R31..R34)              :total liabilities
+  R28  =   R35                        :total assets
+  R24  =   R28 - R26 - R27 - R25      :current assets
+  R21  =   R24 - R23 - R22            :cash
+:FOR COLUMNS=(F1981..F1984)
+:RULES                              : CASH FLOW STATEMENT
+  R51  =   R08                        :net income
+  R53  =   R22(-1) - R22              :change in accounts receivable
+  R54  =   R23(-1) - R23              :change in inventories
+  R55  =   R31 - R31(-1)              :change in accounts payable
+  R56  =  @SUM(R53..R55)              :change in working capital
+  R57  =   R26(-1) - R26              :change in fixed assets
+  R58  =   R25(-1) - R25              :change in investments
+  R59  =  -R07                        :tax provision 
+  R60  =  -R60                        :tax payments
+  R61  =   R33 - R33(-1)              :change in long term debt
+  R62  =   R51 + R52 + @SUM(R56..R61) :net change in cash
+  RX1  =   R21                        :closing cash balance
+  RX2  =   R21(-1)                    :opening cash balance
+  RX3  =   RX1 - RX2                  :net change in cash
+:DISPLAY
+

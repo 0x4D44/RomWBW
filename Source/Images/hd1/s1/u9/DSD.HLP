@@ -1,0 +1,528 @@
+^A align memory displays		^P copy screen to printer
+^B execute back to current PC		^Q XON
+^C exit DSD				^R backup instruction display
+^F find PC in instr display		^S XOFF
+^G execute to next line			^T single step
+^H backspace				^U erase command line
+^J single step				^V advance instruction display
+^L redraw screen			^X erase command line
+^M execute command line			^Y backup memory display
+^N advance memory display		^[ meta command prefix (escape)
+
+~A toggle user breakpoint		~Q quit stack checking toggle
+~B back trace				~R reset the disk system
+~C change display console		~S toggle simulation mode
+~D display breakpoints			~T trace with no operation
+~E toggle expert mode			~U user display toggle
+~H toggle highlighting			~V display version number
+~I initialize stack display		~W toggle words display
+~J toggle ^J single stepping		~X user command X
+~N display next load address		~Y user command Y
+~O open file for viewing		~Z select Z80 register display
+
+ A assemble instructions		 B set permanent breakpoint
+ C call subroutine			 D memory display
+ E enter symbol definition		 F fill memory
+ G execute program			 H hex arithmetic
+ I initialize command line		 J set real time subroutine
+ K kill symbol definition		 L instruction display
+ M move memory				 N set execution limits
+ O write enable range			 P input & output port
+ Q search for string			 R read file
+ S substitute memory			 T trace execution
+ U untrace execution			 V verify memory
+ W write file				 X set register value
+ Y set watch monitor			 Z zero TPA
+
+For more HELP on any of the above commands (A..Z) type ? followed
+by the command characters.  For example: ?A  ?P  ?W
+
+HELP is also available on the following topics:
+
+ASCII	ASCII Character Table		EXP	DSD expressions
+Z80	Z80 instructions					    [Oct. 1985]
+ASCII
+NUL	^@	0	00h		SOH	^A	1	01h
+STX	^B	2	02h		ETX	^C	3	03h
+EOT	^D	4	04h		ENG	^E	5	05h
+ACK	^F	6	06h		BEL	^G	7	07h
+BS	^H	8	08h		HT	^I	9	09h
+LF	^J	10	0Ah		VT	^K	11	0Bh
+FF	^L	12	0Ch		CR	^M	13	0Dh
+SO	^N	14	0Eh		SI	^O	15	0Fh
+
+DLE	^P	16	10h		DC1	^Q	17	11h
+DC2	^S	18	12h		DC3	^R	19	13h
+DC4	^T	20	14h		NAK	^U	21	15h
+SYN	^V	22	16h		ETB	^W	23	17h
+CAN	^X	24	18h		EM	^Y	25	19h
+SUB	^Z	26	1Ah		ESC	^[	27	1Bh
+FS	^\	28	1Ch		GS	^]	29	1Dh
+RS	^^	30	1Eh		VS	^_	31	1Fh
+
+SP 32  20h	!  33  21h	"  34  22h	#  35  23h
+$  36  24h	%  37  25h	&  38  26h	'  39  27h
+(  40  28h	)  41  29h	*  42  2Ah	+  43  2Bh
+,  44  2Ch	-  45  2Dh	*  46  2Eh	/  47  2Fh
+
+0  48  30h	1  49  31h	2  50  32h	3  51  33h
+4  52  34h	5  53  35h	6  54  36h	7  55  37h
+8  56  38h	9  57  39h	:  58  3Ah	;  59  3Bh
+<  60  3Ch	=  61  3Dh	>  62  3Eh	?  63  3Fh
+
+@  64  40h	A  65  41h	B  66  42h	C  67  43h
+D  68  44h	E  69  45h	F  70  46h	G  71  47h
+H  72  48h	I  73  49h	J  74  4Ah	K  75  4Bh
+L  76  4Ch	M  77  4Dh	N  78  4Eh	O  79  4Fh
+
+P  80  50h	Q  81  51h	R  82  52h	S  83  53h
+T  84  54h	U  85  55h	V  86  56h	W  87  57h
+X  88  58h	Y  89  59h	Z  90  5Ah	[  91  5Bh
+\  92  5Ch	]  93  5Dh	^  94  5Eh	_  95  5Fh
+
+`  96  60h	a  97  61h	b  98  62h	c  99  63h
+d 100  64h	e 101  65h	f 102  66h	g 103  67h
+h 104  68h	i 105  69h	j 106  6Ah	k 107  6Bh
+l 108  6Ch	m 109  6Dh	n 110  6Eh	o 111  6Fh
+
+p 112  70h	q 113  71h	r 114  72h	s 115  73h
+t 116  74h	u 117  75h	v 118  76h	w 119  77h
+x 120  78h	y 121  79h	z 122  7Ah	{ 123  7Bh
+| 124  7Ch	} 125  7Dh	~ 126  7Eh	DEL 127 7Fh
+Z80
+8 Bit Load
+
+LD r,s		MOV r,s		40*	register to register move
+LD r,n		MVI r,n		06*	load register immediate
+LD r,(HL)	MOV r,M		46*	load register indirectly from HL
+LD r,(IX+d)	LDX r,d		DD46*	load register indexed from IX
+LD (HL),r	MOV M,r		70*	store register indirect HL
+LD (IX+d),nn	MVIX nn,d	DD06*	store immediate data indexed
+LD A,(BC)	LDAX B		0A	load A from (BC)
+LD A,(DE)	LDAX D		1A	load A from (DE)
+LD (BC),A	STAX B		02	store A into (BC)
+LD (DE),A	STAX D		12	store A into (DE)
+LD (nnnn),A	STA nnnn	32	store A direct
+LD A,I		LDAI		ED57	load A from I
+LD A,R		LDAR		ED5F	load A from R
+LD I,A		STAI		ED47	store A into I
+LD R,A		STAR		ED4F	store A into R
+16 Bit Load
+
+LD rr,nnnn	LXI rr,nnnn	01	load rr immediate
+LD IX,nnnn	LXIX nnnn	DD21	load IX immediate
+LD HL,(nnnn)	LHLD nnnn	2A	load HL direct
+LD rr,(nnnn)	LrrD nnnn	ED4B*	load rr direct
+LD IX,(nnnn)	LIXD nnnn	DD2A	load IX direct
+LD (nnnn),HL	SHLD nnnn	DD22	store HL direct
+LD (nnnn),rr	SrrD nnnn	ED43*	store rr direct
+LD (nnnn),IX	SIXD nnnn	DD22	store IX direct
+LD SP,HL	SPHL		F9	store HL into SP
+LD SP,IX	SPIX		DDF9	store IX into SP
+PUSH rr		PUSH rr		C5*	push rr
+PUSH IX		PUSHIX		DDE5	push IX
+POP rr		POP rr		C1*	pop rr
+POP IX		POPIX		DDE1	pop IX
+Exchange, Block Transfer & Search
+
+EX DE,HL	XCHG		EB	exchange DE, HL
+EX AF,AF'	EXAF		08	exchange AF, AF'
+EXX		EXX		D9	exchange alternate registers
+EX (SP),HL	XTHL		E3	exchange HL & top of stack
+EX (SP),IX	XTIX		DDE3	exchange IX & top of stack
+LDI		LDI		EDA0	mov (HL) to (DE), increment
+LDIR		LDIR		EDB0	same as LDI but repeat until BC=0
+LDD		LDD		EDA8	mov (HL) to (DE), decrement
+LDDR		LDDR		EDB8	same as LDD but repeat until BC=0
+CPI		CCI		EDA1	compare (HL) with A, increment
+CPIR		CCIR		EDB1	  repeat until BC=0 or (HL)=A
+CPD		CCD		EDA9	compare (HL) with A, decrement
+CPDR		CCDR		EDB9	  repeat until BC=0 or (HL)=A
+8 Bit Arithmetic & Logic
+
+ADD A,r		ADD r		80*	add r to A
+ADD A,nn	ADI nn		C5	add immediate to A
+ADD A,(HL)	ADD M		86	add memory to A
+ADD A,(IX+d)	ADDX d		DD86dd	add indexed to A
+ADC A,r		ADC r		88*	add with carry r to A
+ADC A,nn	ADI nn		CE	add with carry immediate to A
+SUB r		SUB s		90*	subtract r from A
+SUB nn		SUI nn		D6	subtract immediate from A
+SBC A,r		SBB r		98*	subtract with carry r from A
+SBC A,nn	SBI nn		DE	subtract with carry immediate from A
+AND r		ANA r		A0*	and r with A
+AND nn		ANI nn		E6	and immediate
+OR r		ORA r		A8*	inclusive or r with A
+OR nn		ORI nn		EE	inclusive or immediate
+XOR r		XRA r		B0*	exclusive or r with A
+XOR nn		XRI nn		F6	exclusive or immediate
+CP r		CMP r		B8*	compare r with A
+CP nn		CPI nn		FE	compare immediate
+INC r		INR r		04*	increment r
+INC (HL)	INR M		34	increment memory
+INC (IX+d)	INRX d		DD34	increment indexed memory
+DEC r		DCR r		05*	decrement r
+DEC (HL)	DCR M		35	decrement memory
+DEC (IX+d)	DCRX d		DD35	decrement indexed memory
+General Purpose
+
+DAA		DAA		27	decmal adjust A
+CPL		CMA		2F	complement A
+NEG		NEG		ED44	negate A
+CCF		CMC		3F	complement carry flag
+SCF		STC		37	set the carry
+NOP		NOP		00	no operation
+HALT		HLT		76	halt processor
+DI		DI		F3	disable interrupts
+EI		EI		FB	enable interrupts
+IM n		IMn		ED46*	interrupt mode 0,1,2
+16 bit Aritmetic
+
+ADD HL,rr	DAD rr		09*	add rr to HL
+ADC HL,rr	DADC rr		ED4A*	add rr and carry to HL
+SBC HL,rr	DSBC rr		ED42*	subtract rr and carry from HL
+ADD IX,rr	DADX rr		DD09*	add rr to IX
+ADD IY,rr	DADY rr		FD09*	add rr to IY
+INC rr		INX rr		03	increment rr
+INC IX		INXIX		DD23	increment IX
+DEC rr		DCX rr		0B	decrement rr
+DEC IX		DCXIX		DD2B	decrement IX
+Rotate & Shift
+
+RLCA		RLC		07	rotate A left circular
+RLA		RAL		17	rotate A left through carry
+RRCA		RRC		0F	rotate A right circular
+RRA		RAR		1F	rotate A right through carry
+RLC r		RLCR r		CB00*	rotate r left circular
+RLC (IX+d)	RLCX d		DDCBd06	rotate indexed byte left circular
+RRC r		RRCR r		CB08*	rotate right circular
+RL r		RALR r		CB10*	rotate left through carry
+RR r		RARR r		CB18*	rotate right through carry
+SLA r		SLAR r		CB20*	shift left zero
+SRA r		SRAR r		CB28*	shift right arithmetic
+SRL r		SRLR r		CB38*	shift right zero
+RLD		RLD		ED6F	rotate nibble left/right between low
+RRD		RRD		ED67	  half of A & (HL)
+Bit Set, Reset & Test
+
+BIT b,r		BIT b,r		CB40*	test bit
+BIT b,(IX+d)	BITX b,d	DDCBd46	test bit indexed
+SET b,r		SETB b,r	CBC0*	set bit
+RES b,r		RES b,r		CB80*	reset bit
+Jump
+
+JP nnnn		JMP nnnn	C3nnnn	jump
+JP cc,nnnn	Jcc nnnn	C2*nnnn	jump on condition: z,nz,c,nc,po,pe,p,m
+JR nnnn		JR nnnn		18ee	jump relative
+JR cc,nnnn	JRcc nnnn	20*ee	jump relative on cond: z,nz,c,nc
+JP (HL)		PCHL		E9	jump to address in HL
+JP (IX)		PCIX		DDE9	jump to address in IX
+DJNZ nnnn	DJNZ nnnn	10ee	decrement B, jump relative if B#0
+Call & Return
+
+CALL nnnn	CALL nnnn	CDnnnn	call
+CALL cc,nnnn	Ccc nnnn	C4*nnnn call on condition: z,nz,c,nc,po,pe,p,m
+RET		RET		C9	return
+RET cc		Rcc		C0*	return on conditon: z,nz,c,nc,po,pe,p,m
+RETI		RETI		ED4D	return from interrupt
+RETN		RETN		ED45	return from non-maskable interrupt
+RST p		RSTp		C7*	restart
+Input & Output
+
+IN A,(nn)	IN nn		DBnn	input from port
+IN r,(C)	INP r		ED40*	input from port (C) to r
+INI		INI		EDA2	input from (C) to (HL) & increment
+INIR		INIR		EDB2	same as INI but repeat until B=0
+IND		IND		EDAA	input from (C) to (HL) & decrement
+INDR		INDR		EDBA	same as IND but repeat until B=0
+OUT (nn),A	OUT nn		D3nn	output to port
+OUT (C),r	OUTP r		ED41*	output to port (C) from r
+OUTI		OUTI		EDA3	output to (C) from (HL) & increment
+OTIR		OUTIR		EDB3	same as OUTI but repeat until B=0
+OUTD		OUTD		EDAB	output to (C) from (HL) & decrement
+OTDR		OUTDR		EDBB	same as OUTD but repeat until B=0
+A 
+	Assemble instructions
+
+A<adr>[,<instr>]
+
+A100
+A0100 lxi sp,stack
+A0103 call preset
+A0106
+
+A100
+A0100 ld sp,stack
+A0103 ld a,(flag)
+A0106 and a
+A0107 jp nz,flagoff
+B 
+	Set/Clear permanent breakpoints
+
+B<adr>		set breakpoint
+B		clear breakpoints
+
+B5
+Btest
+C 
+	Call subroutine
+
+C<adr>
+
+cinit
+C0AF01
+D 
+	Set memory displays
+
+D		advance memory displays
+D<adr>		set display 1 to <adr>, display 2 to <adr>+40
+D<adr1>,<adr2>	set display 1 to <adr1>, display 2 to <adr2>
+D,<adr>		set display 2 to <adr>
+
+D100
+D buf1,buf2
+D,5c
+E 
+	Define symbol
+
+Symbols defined with this command take precedence over symbols
+read from a symbol file.
+
+E<symbol>,<adr>
+
+eTPA,100
+E"1st_Buf",1000
+F 
+	Fill memory
+
+F<adr1>,<adr2>,<const>	fill from <adr1> to <adr2> with constant <const>
+
+F5c,8000,0
+G 
+	Go (execute program)
+
+G		execute from current PC
+G100		execute from 100
+G,aah,gna	execute from current PC with temporary breakpoints @ AAH, GNA
+Greset,exit	execute from RESET with breakpoint @ EXIT
+H 
+	Hex math
+
+H<adr1>,<adr2>		display sum and difference of <adr1>,<adr2>
+I 
+	Initial command line & FCBs
+
+Initialize file control blocks at 5C,6C and command tail at 80
+the same way the CCP does.
+
+I <command line>
+
+i FILE.IN FILE.OUT
+J 
+	Set real time subroutines (RTS)
+
+Use RTS to speed up emulation of bug free subroutines.  When the
+entry point of a RTS is reached, the emulator sets a breakpoint
+at the return address and enters "real time" execution mode.
+None of the protections of the emulator are available while under
+real time execution.  Operating system calls are good candidates
+for RTS.  Location 0005 is set initially as a RTS.  Use of this
+command turns on emulation.
+
+J	clear all RTS
+J<adr>	set RTS entry point at <adr> and turn emulation on
+
+jbdos
+jsort
+j0b10
+K 
+	Kill symbol definition
+
+This command only works with symbols defined using the E command.
+Symbols read from a symbol file (x.SYM) cannot be deleted.
+
+K<symbol>
+
+Ktpa
+K"1st_Buf"
+L 
+	Set instruction display
+
+L	advance instruction display
+L<adr>	set display to <adr>
+
+L100
+Lcount_em
+M 
+	Move memory
+
+This command moves only one byte at a time.
+
+M<adr1>,<adr2>,<adr3>	move from <adr1>...<adr2> to <adr3>
+
+M5c,6B,6c	copy FCB at 5C to 6C
+N 
+	Set execution range
+
+N sets a range in which the emulator allows execution.  When no
+ranges are set, execution is allowed everywhere.  Use of this
+command turns on emulation.
+
+N<adr1>,<adr2>	permits execution within <adr1>...<adr2>
+
+N100,codeend
+O 
+	Write enable range
+
+O enables a range for write operations while simulating.  When no
+ranges are set, execution is allowed everywhere.  Use of this
+command turns on emulation.  The stack does not need to be write
+enabled.
+
+O<adr1>,<adr2>	enables write operations within <adr1>...<adr2>
+
+Odatabeg,dataend
+P 
+	Port I/O
+
+P<port>		input from <port>
+P<port>,<value>	output <value> to <port>
+
+Pff
+p1,7
+Q 
+	Search for string
+
+By default, searching is case/parity insensitive, however the use
+of ANY byte constants will force the search to exact matching mode.
+
+Q<adr1>,<adr2>,<text>	Search for <text> from <adr1> through <adr2>
+
+Q100,8000,"john"
+Q100,8000,"johh",0d,0a
+Q0,ffff,33,22,1
+R 
+	Read file
+
+The command is used in conjunction with the I command to read a
+file into the TPA.
+
+The Read command loads files according to their type:
+	SYM	CP/M standard symbol files
+	HEX	Intel hex files
+		Blank, tries SYM first then COM
+	*	All other types are loaded as COM files
+
+R	read file
+R<off>	read file with offset
+
+R7f00
+S 
+	Set memory
+
+S<adr>	enter substitute memory mode @ <adr>
+
+s5c
+s 100
+T 
+	Trace execution
+
+T	execute one instruction
+T<n>	execute <n> instructions, update display between each instruction
+U 
+	Untrace execution
+
+U	execute 1 instruction
+U<n>	execute <n> instructions then update display
+V 
+	Verify (compare) memory
+
+V			Continue verification from last difference
+V<adr1>,<adr2>,<adr3>	Compare <adr1>...<adr2> with <adr3>
+
+Vbuf1,buf1+0ff,buf2
+W 
+	Write file
+
+This command is use in conjunction with the I command to write a
+portion of the TPA to a file.
+
+W		write 100 through next load address
+W<adr>		write 100...<adr>
+W<adr1>,<adr2>	write <adr1>...<adr2>
+
+inewdsd.com
+w
+
+isaveit.com
+w100,8000
+X 
+	Set register value
+
+X<register>,<value>	Set register (A, B, D, H, S, P) to <value>
+X<flag>,<value>		Set flag to <value>
+
+A short form of this command allows use without the comma between
+the name of the register/flag and the value.
+
+XP100
+xc1
+xz0
+xh,buffer
+Y 
+	Set watch monitor
+
+The watch monitor allows the emulator to breakpoint when a
+register or memory location reaches a certain value.  Use of this
+command turns emulation on.  The watch value is 16 bits wide.  A
+register may be "watched" by prefixing its name with a "%"; legal
+register names are AF, B, BC, D, DE, H, HL, IX, IY, PSW, SP, S,
+PC, P, X, Y.
+
+Y			clear watch monitor
+Y<adr>,<value>		watch <adr> for <value>
+Y<adr>,<value>,<mask>	as above but applies <mask> before comparison
+
+y%hl,buf		stop when HL reaches BUF
+ycount,0		stop when location COUNT reaches 0
+Z 
+	Zero memory
+
+Z provides a convenient way to zero the TPA.
+
+Z	zero 100 through top of TPA
+Z<adr>	zero 100...<adr>
+EXP
+
+Most commands accept expressions in place of a numeric constant.
+DSD80 can parse several forms of expressions:
+
+1) Simple HEX constants: 0100, 1, 0, 8fff, a000, 0f00
+
+2) A symbol: tpa, BufBuf, STACK, total, readdisk
+
+3) Two constants or symbols seperated by "+" or "-": BUF-3,
+	100+1, FCB+1, track+offset
+
+4) A qualified symbol of the form <symbol1>/<symbol2>[/<symbol3>...]
+	BLKREAD/LOCALVAR
+
+5) An expression preceeded by a prefix operator:
+	# decimal constant: #100, begin+#100
+	@ indirect address: @bufloc, @total
+	% register address: %hl, %pc (used with watch monitor)
+	" string address: "a:myfile"
+	' ascii characters: 'a', 'AB', ' '
+	. parse as symbol only: .disk, .abc
+	$ return program counter: $
+	^ return top of stack: ^
+	- unary minus: -1, -2, -rcount
+
+Case never matters anywhere in DSD.
+**
+(C) Copyright 1984, 1985 SOFT ADVANCES
+ALL RIGHTS RESERVED
+ 
+	Zero memory
+
+Z prov

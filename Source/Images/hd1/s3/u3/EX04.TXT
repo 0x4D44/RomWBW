@@ -1,0 +1,74 @@
+:OPTIONS
+  ROWWID(21)
+:TITLES
+  1 "PLAN80 EXAMPLE #4"
+  2 "Reinvestment of Earnings Model"
+:COLUMNS
+  OPEN           "Opening" "Balance"
+  Y1981                " "    "1981"
+  Y1982                " "    "1982"
+  Y1983                " "    "1983"
+  Y1984                " "    "1984"
+  Y1985                " "    "1985"
+:ROWS
+  InvInc         "Income Statement"
+                 "  Investment Income"
+  IntExp         "  Interest Expense"
+  Admin          "  Admin Expense"
+  Deprec         "  Depreciation"
+  PBT      (-)   "    Profit Before Tax"
+  Taxes          "  Taxes"
+  NET      (-=)  "    Net Income/Loss"
+  Cash     (s)   "Balance Sheet - Assets"
+                 "  Cash"
+  Invest         "  Investments"
+  Physical       "  Physical Assets"
+  CumDepr        "  Accum Depreciation"
+  ASSETS   (-=)  "    Total Assets"
+  Debt     (s)   "Balance Sheet - Liabilities"
+                 "  Debt"
+  Equity         "  Equity"
+  LIABIL   (-=)  "    Total Liabilities"
+  NewPhys  (s)   "Assumptions"
+                 "  New Physical Assets"
+  Yeild    (3)   "  Yeild on Investments"
+  IntRate  (3)   "  Cost for Debt"
+  Bracket1       "  Tax Bracket #1"
+  Bracket2       "  Tax Bracket #2"
+  Bracket3       "  Tax Bracket #3"
+  TRate1   (3)   "  Tax Rate #1"
+  TRate2   (3)   "  Tax Rate #2"
+  TRate3   (3)   "  Tax Rate #3"
+:DATA
+  Admin     =     *  -175 -20 (*108%)
+  Cash      =  1000
+  NewPhys   =     *    50  50 
+  Debt      =   500
+  Equity    =   500
+  Yeild     =     *    30% +
+  IntRate   =     *    15% +
+  Bracket1  =     *     0  +
+  Bracket2  =     *    99  +
+  Bracket3  =     *   199  +
+  TRate1    =     *    20% +
+  TRate2    =     *    30% +
+  TRate3    =     *    40% +
+:RULES 
+  Physical     = @CUM(NewPhys)
+  CumDepr      = -@SOD(NewPhys,6)
+
+:FOR COLUMNS=(OPEN)
+:INCLUDE "PROC04.TXT"
+:FOR COLUMNS=(Y1981)
+:INCLUDE "PROC04.TXT"
+:FOR COLUMNS=(Y1982)
+:INCLUDE "PROC04.TXT"
+:FOR COLUMNS=(Y1983)
+:INCLUDE "PROC04.TXT"
+:FOR COLUMNS=(Y1984)
+:INCLUDE "PROC04.TXT"
+:FOR COLUMNS=(Y1985)
+:INCLUDE "PROC04.TXT"
+
+:DISPLAY
+

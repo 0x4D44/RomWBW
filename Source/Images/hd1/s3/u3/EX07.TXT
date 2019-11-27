@@ -1,0 +1,47 @@
+:TITLES
+  1 "PLAN80 EXAMPLE #7"
+  2 "BUDGET CONSOLIDATION"
+:COLUMNS
+  Q1   (1)  "1ST"  "QTR"
+  Q2   (1)  "2ND"  "QTR"
+  Q3   (1)  "3RD"  "QTR"
+  Q4   (1)  "4TH"  "QTR"
+  YEAR (1)  "FULL" "YEAR"
+:ROWS
+  H01       "HEADCOUNT"
+            " EXEMPT"
+  H02       " NONEXEMPT"
+  H99  (-)  "  TOTAL"
+  S01  (S)  "EXPENSE"
+            " SALARIES"
+  S02       " FRINGES"
+  S03       " OVERTIME"
+  S04       " SUPPLIES"
+  S05       " RENTALS"
+  S06       " OCCUPANCY"
+  S07       " TELEPHONE"
+  S08       " TRANSFERS"
+  S99  (-=) "  TOTAL"
+:INITIALIZE
+:INCLUDE "CC1001.TXT"
+:INCLUDE "PROC07.TXT"
+:PUT "T1001"
+:INITIALIZE
+:INCLUDE "CC1002.TXT"
+:INCLUDE "PROC07.TXT"
+:PUT "T1002"
+:INITIALIZE
+:INCLUDE "CC1003.TXT"
+:INCLUDE "PROC07.TXT"
+:PUT "T1003"
+:
+: * *  NOW CONSOLIDATE  * *
+:
+:INITIALIZE
+:GET "T1001" ADD
+:GET "T1002" ADD
+:GET "T1003" ADD
+:TITLES
+  3 "SUMMARY OF COST CENTERS 1001-1003"
+:DISPLAY
+

@@ -1,0 +1,270 @@
+Note:  The following reflects available information
+for the following terminals, but has not been verified
+for all terminals. 
+
+  File Name        Terminal Description
+
+  ADDS.TRM         ADDS Regent
+  ADM3A.TRM        Lear Siegler ADM-3A
+  CROMEMCO.TRM     Cromemco 3102
+  HAZ1500.TRM      Hazeltine 1500
+  HP125.TRM        Hewlett Packard 125
+  IBM3101.TRM      IBM 3101
+  MICRO.TRM        Microterm ACT IV/V
+  SBRAIN.TRM       Intertec Superbrain
+  SOROC.TRM        Soroc 120
+  TELEVID.TRM      Televideo 912/920
+  VECTOR.TRM       Vector Flashwriter II
+  ZENITH.TRM       Zenith WH19/Heath H19
+
+
+Please forward any suggested changes or additions to
+
+  Business Planning Systems, Inc.
+  Two North State Street
+  Dover DE  19901
+
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     ADDS Regent
+CURSOR POSITIONING:
+B - Leadin Sequence          27 89
+C - Row or Column + Offset   ROW+32
+D - Second Sequence      
+E - Row or Column + Offset   COL+32 
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    12
+H - Clear to End of Line     27 75
+I - Clear to End of Screen   
+J - Highlighting On          
+K - Highlighting Off         
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     Lear Siegler ADM-3A
+CURSOR POSITIONING:
+B - Leadin Sequence          27 61
+C - Row or Column + Offset   ROW+32
+D - Second Sequence      
+E - Row or Column + Offset   COL+32 
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    26
+H - Clear to End of Line     
+I - Clear to End of Screen   
+J - Highlighting On          
+K - Highlighting Off         
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     Cromemco 3102
+CURSOR POSITIONING:
+B - Leading Sequence         27 70
+C - Row or Column + Offset   ROW+32
+D - Second Sequence      
+E - Row or Column + Offset   COL+32
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    27 69
+H - Clear to End of Line     27 75
+I - Clear to End of Screen   27 74
+J - Highlighting On          
+K - Highlighting Off         
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     Hazeltine 1500
+CURSOR POSITIONING:
+B - Leading Sequence         126 17
+C - Row or Column + Offset   COL+128
+D - Second Sequence      
+E - Row or Column + Offset   ROW+32 
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    126 28
+H - Clear to End of Line     126 15
+I - Clear to End of Screen   126 24
+J - Highlighting On          126 31
+K - Highlighting Off         126 25
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     Hewlett Packard 125
+CURSOR POSITIONING:
+B - Leading Sequence         27 38 97
+C - Row or Column + Offset   COL+0
+D - Second Sequence          99
+E - Row or Column + Offset   ROW+0
+F - Ending Sequence          89
+OTHER FUNCTIONS:
+G - Clear Screen and Home    27 72 27 74 27 72
+H - Clear to End of Line     27 75
+I - Clear to End of Screen   27 74
+J - Highlighting On          
+K - Highlighting Off         
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     YES
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     IBM 3101
+CURSOR POSITIONING:
+B - Leading Sequence         27 89
+C - Row or Column + Offset   ROW+32
+D - Second Sequence      
+E - Row or Column + Offset   COL+32
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    27 76
+H - Clear to End of Line     27 73
+I - Clear to End of Screen   27 74
+J - Highlighting On          
+K - Highlighting Off         
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     Microterm ACT IV/V 
+CURSOR POSITIONING:
+B - Leadin Sequence          20
+C - Row or Column + Offset   ROW+0
+D - Second Sequence      
+E - Row or Column + Offset   COL+48 
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    12 
+H - Clear to End of Line     30 
+I - Clear to End of Screen   31 
+J - Highlighting On          14 
+K - Highlighting Off         14 
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     Intertec Superbrain
+CURSOR POSITIONING:
+B - Leading Sequence         27 89
+C - Row or Column + Offset   ROW+32
+D - Second Sequence      
+E - Row or Column + Offset   COL+32
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    12
+H - Clear to End of Line     27 126 75
+I - Clear to End of Screen   27 126 107
+J - Highlighting On          27 126 66
+K - Highlighting Off         27 126 98
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     SOROC 120
+CURSOR POSITIONING:
+B - Leadin Sequence          27 61
+C - Row or Column + Offset   ROW+32
+D - Second Sequence      
+E - Row or Column + Offset   COL+32 
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    27 42 + 10 nulls
+H - Clear to End of Line     27 84
+I - Clear to End of Screen   27 89
+J - Highlighting On          27 40
+K - Highlighting Off         27 41
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     Televideo 912/920
+CURSOR POSITIONING:
+B - Leadin Sequence          27 61
+C - Row or Column + Offset   ROW+32
+D - Second Sequence      
+E - Row or Column + Offset   COL+32 
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    26
+H - Clear to End of Line     27 84
+I - Clear to End of Screen   27 89
+J - Highlighting On          27 41
+K - Highlighting Off         27 40
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     Vector Flashwriter II
+CURSOR POSITIONING:
+B - Leading Sequence         27
+C - Row or Column + Offset   COL+128
+D - Second Sequence      
+E - Row or Column + Offset   ROW+128
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    4
+H - Clear to End of Line     17
+I - Clear to End of Screen   
+J - Highlighting On          20
+K - Highlighting Off         20
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+TERMINAL DESCRIPTION
+A - Name                     
+CURSOR POSITIONING:          Zenith WH19/Heath H19
+B - Leadin Sequence          27 89
+C - Row or Column + Offset   ROW+32
+D - Second Sequence      
+E - Row or Column + Offset   COL+32 
+F - Ending Sequence
+OTHER FUNCTIONS:
+G - Clear Screen and Home    27 69
+H - Clear to End of Line     27 75
+I - Clear to End of Screen   27 74
+J - Highlighting On          27 112
+K - Highlighting Off         27 113
+MISCELLANEOUS INFO:
+M - Number of Rows           24
+N - Number of Columns        80
+O - Cursor Origin            0
+P - Use ASCII Characters     NO
+----------------------------------------------
+
+        80
+O - Cursor Origin            

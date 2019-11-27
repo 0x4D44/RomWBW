@@ -1,0 +1,100 @@
+:TITLES
+  1  "PLAN80 EXAMPLE #2"
+  2  "Projected Sales and Gross Margin"
+:COLUMNS
+  F1981          "     Act" "1981"
+  F1982          "     Est" "1982"
+  F1983          "    ----" "1983"
+  F1984          "--- Proj" "1984"
+  F1985          " -------" "1985"
+  F1986 (P)      "  ------" "1986"
+  F1987          "--------" "1987"
+  F1988          "--  Proj" "1988"
+  F1989          "ected  -" "1989"
+  F1990          "--------" "1990"
+  F1991          "--------" "1991"
+:ROWS
+  MARKET1             "Total Market Units (Millions)"
+                      " Product 1"
+  MARKET2             " Product 2"
+  MARKET3             " Product 3"
+  MARKET99  (-)       "  Total"
+  SHARE1    (S1)      "ABC Share (Percent)"
+                      " Product 1"
+  SHARE2    (1)       " Product 2"
+  SHARE3    (1)       " Product 3"
+  SHARE99   (1-)      "  Total"
+  UNITS1    (S1)      "ABC Units (Millions)"
+                      " Product 1"
+  UNITS2    (1)       " Product 2"
+  UNITS3    (1)       " Product 3"
+  UNITS99   (1-)      "  Total"
+  PRICE1    (S3)      "Average Unit Price"
+                      " Product 1"
+  PRICE2    (3)       " Product 2"
+  PRICE3    (3)       " Product 3"
+  PRICE99   (3-)      "  Average"
+  DOLLAR1   (S1)      "Sales Dollars (Millions)"
+                      " Product 1"
+  DOLLAR2   (1)       " Product 2"
+  DOLLAR3   (1)       " Product 3"
+  DOLLAR99  (1-)      "  Total"
+  COST1     (S3)      "Average Unit Cost"
+                      " Product 1"
+  COST2     (3)       " Product 2"
+  COST3     (3)       " Product 3"
+  COST99    (3-)      "  Total"
+  AGM1      (S1)      "Average Gross Margin (Percent)"
+                      " Product 1"
+  AGM2      (1)       " Product 2"
+  AGM3      (1)       " Product 3"
+  AGM99     (1-)      "  Average"
+:DATA
+  MARKET1 = 110 115 (*1.04)
+  MARKET2 =  88 103 (*1.08)
+  MARKET3 =  28  41 (*1.12)
+  SHARE1  = .30 .31 .32 .33 .34 .35 +
+  SHARE2  = .15 .18 (+.015)
+  SHARE3  = .20 .20 .19 .18 .17 .16 +
+  PRICE1  = .885 .903 (*1.10)
+  PRICE2  = .510 .550 (*1.08)
+  PRICE3  = 1.30 1.45 (*1.12)
+  COST1   = .502 .558 (*1.09)
+  COST2   = .317 .310 (*0.92)
+  COST3   = .704 .664 (*1.05)
+:RULES
+  : Total Units
+    MARKET99 = @SUM(MARKET1..MARKET3)
+  : ABC Units = Total Units * Share
+    UNITS1   = MARKET1 * SHARE1
+    UNITS2   = MARKET2 * SHARE2
+    UNITS3   = MARKET3 * SHARE3
+    UNITS99  = @SUM(UNITS1..UNITS3)
+  : Total Unit Share
+    SHARE99  = UNITS99 / MARKET99 * 100
+    SHARE1   = SHARE1 * 100
+    SHARE2   = SHARE2 * 100
+    SHARE3   = SHARE3 * 100
+  : Sales Dollars = Units * Price
+    DOLLAR1  = UNITS1 * PRICE1
+    DOLLAR2  = UNITS2 * PRICE2
+    DOLLAR3  = UNITS3 * PRICE3
+    DOLLAR99 = @SUM(DOLLAR1..DOLLAR3)
+  : Average Price = Dollars / Units
+    PRICE99  = DOLLAR99 / UNITS99
+  : Cost = Units * Unit Cost
+    AGM1     = UNITS1 * COST1
+    AGM2     = UNITS2 * COST2
+    AGM3     = UNITS3 * COST3
+    AGM99    = @SUM(AGM1..AGM3)
+  : Average Cost = Cost / Units
+    COST99   = AGM99 / UNITS99
+  : Gross Margin = Marginal Revenue / Sales
+    AGM1     = DOLLAR1-AGM1 / DOLLAR1 * 100
+    AGM2     = DOLLAR2-AGM2 / DOLLAR2 * 100
+    AGM3     = DOLLAR3-AGM3 / DOLLAR3 * 100
+    AGM99    = DOLLAR99-AGM99 / DOLLAR99 * 100
+:OPTIONS
+  ROWWID(30)
+:DISPLAY
+

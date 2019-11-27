@@ -1,0 +1,14 @@
+:RULES 
+  Deprec       =  CumDepr - CumDepr(-1)
+  Invest       =  Invest(-1)+@MAX(100,Cash(-1))-100
+  Debt         =  @MAX(Debt(-1),Equity(-1),(60%*Invest))
+  InvInc       =  Yeild * Invest
+  IntExp       =  -IntRate * Debt
+  PBT          =  Admin + InvInc + Deprec + IntExp 
+  Taxes        =  -PBT * @LOOKUP(PBT,Bracket1..Bracket3,TRate1)
+  NET          =  PBT + Taxes
+  Equity       =  Equity(-1) + NET
+  LIABIL       =  Debt + Equity
+  ASSETS       =  LIABIL
+  Cash         =  ASSETS - CumDepr - Physical - Invest
+

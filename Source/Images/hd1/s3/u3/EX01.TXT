@@ -1,0 +1,47 @@
+:TITLES
+  1 "PLAN80 EXAMPLE #1"
+  2 "Five Year Profitability Model"
+:COLUMNS
+  Y1981  "1981"
+  Y1982  "1982"
+  Y1983  "1983"
+  Y1984  "1984"
+  Y1985  "1985"
+:ROWS
+  UNITS          "ASSUMPTIONS"
+                 "  Units"
+  PRICE  (2)     "  Price"
+  UCOST  (3)     "  Unit Cost"
+  TAXRT  (3)     "  Tax Rate"
+  SALES          "DOLLARS (THOUSANDS)"
+                 "  Sales"
+  COST           "  Cost of Sales"
+  OVERHEAD       "  Overhead"
+  PBT    (-)     "  Profit Before Tax"
+  TAXES          "  Taxes"
+  NET    (-=)    "  Net Income"
+  GPM    (1)     "MARGINS (PERCENT)"
+                 "  Gross Profit"
+  OPM    (1)     "  Operating Profit"
+  NPM    (1)     "  Net Income"
+:DATA
+  UNITS    =  100  118 (*1.20)
+  PRICE    = 1.32 1.49 (*1.10)
+  UCOST    = .818 .919 (*1.12)
+  TAXRT    =  .46 +
+  OVERHEAD =   19   19 (*1.08)
+:INTERACTIVE
+:RULES
+  SALES    = UNITS * PRICE
+  COST     = UNITS * UCOST
+  PBT      = SALES - COST - OVERHEAD
+  TAXES    = TAXRT * PBT
+  NET      = PBT - TAXES
+  GPM      = 100 * (SALES - COST) / SALES
+  OPM      = 100 * PBT / SALES
+  NPM      = 100 * NET / SALES
+:OPTIONS
+  ROWWID(19)
+:DISPLAY
+
+
